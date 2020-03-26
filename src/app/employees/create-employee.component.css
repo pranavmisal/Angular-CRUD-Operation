@@ -1,7 +1,11 @@
-.panel-body{
-    padding: 5px;
+.panel-body {
+  padding: 5px;
 }
 
-.panel-footer{
-    padding: 5px;
+.panel-footer {
+  padding: 5px;
+}
+
+select.form-control:not([size]):not([multiple]) {
+  height: calc(3.25rem + 2px) !important;
 }
