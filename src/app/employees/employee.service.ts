@@ -13,7 +13,7 @@ export class EmployeeService {
       dateOfBirth: new Date("10/25/1988"),
       department: "1",
       isActive: true,
-      photoPath: "assets/images/image2.png"
+      photoPath: "assets/images/image1.png"
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ export class EmployeeService {
       dateOfBirth: new Date("12/28/1990"),
       department: "4",
       isActive: true,
-      photoPath: "assets/images/image2.png"
+      photoPath: "assets/images/image1.png"
     }
   ];
 

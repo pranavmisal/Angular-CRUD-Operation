@@ -1,0 +1,11 @@
+a {
+  color: beige;
+  text-decoration: none;
+  margin: 10px;
+  cursor: pointer;
+}
+
+li a:hover {
+  border-bottom: 3px solid red;
+  font-weight: bold;
+}
