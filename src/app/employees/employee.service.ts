@@ -11,7 +11,7 @@ export class EmployeeService {
       contactPrefrence: "Email",
       email: "mark@gmail.com",
       dateOfBirth: new Date("10/25/1988"),
-      department: "IT",
+      department: "1",
       isActive: true,
       photoPath: "assets/images/image2.png"
     },
@@ -22,7 +22,7 @@ export class EmployeeService {
       contactPrefrence: "Phone",
       phoneNumber: 9875489756,
       dateOfBirth: new Date("10/25/1988"),
-      department: "HR",
+      department: "3",
       isActive: true,
       photoPath: "assets/images/image2.png"
     },
@@ -33,7 +33,7 @@ export class EmployeeService {
       contactPrefrence: "Phone",
       phoneNumber: 9865489756,
       dateOfBirth: new Date("12/28/1990"),
-      department: "HR",
+      department: "4",
       isActive: true,
       photoPath: "assets/images/image2.png"
     }
@@ -41,5 +41,9 @@ export class EmployeeService {
 
   getEmployees(): Employee[] {
     return this.listEmployees;
+  }
+
+  save(employee: Employee) {
+    this.listEmployees.push(employee);
   }
 }
