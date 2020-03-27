@@ -1,13 +1,14 @@
+import { DateFormatter } from "ngx-bootstrap/datepicker/public_api";
+
 export class Employee {
-    id: number;
-    name: string;
-    gender: string;
-    email?: string;
-    phoneNumber?: number;
-    contactPrefrence: string;
-    dateOfBirth: Date;
-    department: string;
-    isActive: boolean;
-    photoPath?: string;
-  }
-  
+  id: number;
+  name: string;
+  gender: string;
+  email?: string;
+  phoneNumber?: number;
+  contactPrefrence: string;
+  dateOfBirth: Date;
+  department: string;
+  isActive: boolean;
+  photoPath?: string;
+}
