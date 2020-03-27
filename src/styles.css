@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  font-family: monospace;
+}
+
+body {
+  background: gray;
+}
+
+.form-group:hover {
+  box-shadow: 1px 0px 10px 10px gray;
+  background: transparent;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+img {
+  border: 2px solid darkred;
+  border-radius: 3px;
+  box-shadow: 0px 0px 0px 2px lightgray;
+}
+
+.col-xs-8 {
+  border: 2px solid darkred;
+  margin-top: 10px;
+  box-shadow: 0px 0px 0px 2px lightgray;
+  border-radius: 3px;
+}
