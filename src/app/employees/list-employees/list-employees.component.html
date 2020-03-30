@@ -12,7 +12,7 @@
   </button>
 </div>
 <div class="card-body">
-  <div *ngFor="let employee of employees | employeeFilter: searchTerm">
+  <div *ngFor="let employee of filteredEmployees" (mousemove)="onMouseMove()">
     <div (click)="onClick(employee.id)" class="pointerCursesr">
       <app-display-employee
         [employee]="employee"
