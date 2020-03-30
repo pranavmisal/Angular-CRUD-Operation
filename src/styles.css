@@ -31,4 +31,6 @@ img {
   background: #343a40 !important;
   color: #fff;
   border-radius: 3px;
+  bottom: 0;
+  margin: auto;
 }
