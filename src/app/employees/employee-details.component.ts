@@ -10,7 +10,7 @@ import { Employee } from "../models/employee.model";
 })
 export class EmployeeDetailsComponent implements OnInit {
   employee: Employee;
-  private _id;
+  private _id: number;
 
   constructor(
     private _route: ActivatedRoute,

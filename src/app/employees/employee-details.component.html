@@ -1,4 +1,7 @@
-<div class="card card-primary">
+<div
+  class="card card-primary"
+  [class.card-success]="selectedEmployeeId === employee.id"
+>
   <div class="card-header bg-primary">
     <h3 class="card-title">{{ employee.name }}</h3>
   </div>
@@ -71,7 +74,9 @@
   </div>
   <br />
   <div class="pannel-footer">
-    <a class="btn btn-primary" routerLink="/list">Back to List</a>
+    <a class="btn btn-primary" [routerLink]="['/list', { id: employee.id }]"
+      >Back to List</a
+    >
     <button class="btn btn-primary pull-right" (click)="getNextEmployee()">
       View Next Employee
     </button>
