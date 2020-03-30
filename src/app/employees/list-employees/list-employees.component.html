@@ -6,6 +6,11 @@
     [(ngModel)]="searchTerm"
   />
 </div>
+<div class="form-group">
+  <button (click)="changeEmployeeName()" class="btn btn-primary">
+    Change Employee Name
+  </button>
+</div>
 <div class="card-body">
   <div *ngFor="let employee of employees | employeeFilter: searchTerm">
     <div (click)="onClick(employee.id)" class="pointerCursesr">
