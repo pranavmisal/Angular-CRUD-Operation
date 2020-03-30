@@ -1,5 +1,13 @@
+<div class="form-group">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Serach by Name"
+    [(ngModel)]="searchTerm"
+  />
+</div>
 <div class="card-body">
-  <div *ngFor="let employee of employees">
+  <div *ngFor="let employee of employees | employeeFilter: searchTerm">
     <div (click)="onClick(employee.id)" class="pointerCursesr">
       <app-display-employee
         [employee]="employee"
