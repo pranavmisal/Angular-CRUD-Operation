@@ -17,6 +17,8 @@ import { CreateEmployeeCanDeactivateGuardService } from "./employees/create-empl
 import { EmployeeDetailsComponent } from "./employees/employee-details.component";
 import { EmployeeFilterPipe } from "./employees/employee-filter.pipe";
 import { EmployeeListResolverService } from "./employees/employee-list-resolver.service";
+import { PageNotFoundComponent } from "./page-not-found.component";
+import { EmployeeDetailsGuardService } from "./employees/employee-details-guard.service";
 
 const appRoutes: Routes = [
   {
@@ -29,8 +31,13 @@ const appRoutes: Routes = [
     component: CreateEmployeeComponent,
     canDeactivate: [CreateEmployeeCanDeactivateGuardService]
   },
-  { path: "employees/:id", component: EmployeeDetailsComponent },
-  { path: "", redirectTo: "/list", pathMatch: "full" }
+  {
+    path: "employees/:id",
+    component: EmployeeDetailsComponent,
+    canActivate: [EmployeeDetailsGuardService]
+  },
+  { path: "", redirectTo: "/list", pathMatch: "full" },
+  { path: "notfound", component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -42,20 +49,22 @@ const appRoutes: Routes = [
     ConfirmEqualValidatorDirective,
     DisplayEmployeeComponent,
     EmployeeDetailsComponent,
-    EmployeeFilterPipe
+    EmployeeFilterPipe,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
-    RouterModule.forRoot(appRoutes, { enableTracing: true }),
+    RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule
   ],
   providers: [
     EmployeeService,
     CreateEmployeeCanDeactivateGuardService,
-    EmployeeListResolverService
+    EmployeeListResolverService,
+    EmployeeDetailsGuardService
   ],
   bootstrap: [AppComponent]
 })
