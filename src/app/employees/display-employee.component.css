@@ -26,3 +26,8 @@
 .card-title {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+button.btn {
+  width: 70px;
+  margin: 5px;
+}
