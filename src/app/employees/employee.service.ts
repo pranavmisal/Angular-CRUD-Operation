@@ -16,7 +16,7 @@ export class EmployeeService {
       dateOfBirth: new Date("10/25/1988"),
       department: "1",
       isActive: true,
-      photoPath: "assets/images/image1.png"
+      photoPath: "assets/images/image1.png",
     },
     {
       id: 2,
@@ -27,7 +27,7 @@ export class EmployeeService {
       dateOfBirth: new Date("10/25/1988"),
       department: "3",
       isActive: true,
-      photoPath: "assets/images/image2.png"
+      photoPath: "assets/images/image2.png",
     },
     {
       id: 3,
@@ -38,8 +38,8 @@ export class EmployeeService {
       dateOfBirth: new Date("12/28/1990"),
       department: "4",
       isActive: true,
-      photoPath: "assets/images/image1.png"
-    }
+      photoPath: "assets/images/image1.png",
+    },
   ];
 
   getEmployees(): Observable<Employee[]> {
@@ -47,10 +47,29 @@ export class EmployeeService {
   }
 
   getEmployee(id: number): Employee {
-    return this.listEmployees.find(e => e.id === id);
+    return this.listEmployees.find((e) => e.id === id);
   }
 
   save(employee: Employee) {
-    this.listEmployees.push(employee);
+    if (employee.id === null) {
+      const maxId = this.listEmployees.reduce(function (e1, e2) {
+        return e1.id > e2.id ? e1 : e2;
+      }).id;
+      employee.id = maxId + 1;
+
+      this.listEmployees.push(employee);
+    } else {
+      const foundIndex = this.listEmployees.findIndex(
+        (e) => e.id === employee.id
+      );
+      this.listEmployees[foundIndex] = employee;
+    }
+  }
+
+  deleteEmployee(id: number) {
+    const i = this.listEmployees.findIndex((e) => e.id === id);
+    if (i !== -1) {
+      this.listEmployees.splice(i, 1);
+    }
   }
 }

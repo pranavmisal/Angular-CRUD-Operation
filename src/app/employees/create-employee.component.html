@@ -2,7 +2,7 @@
   <div class="card-body">
     <div class="card card-primary">
       <div class="card-header bg-primary">
-        <h3 class="card-title">Create Employee</h3>
+        <h3 class="card-title">{{ panelTitle }}</h3>
       </div>
 
       <div class="panel-body">
@@ -30,14 +30,13 @@
           <label for="email" class="control-label">Email</label>
           <input
             id="email"
-            [required]="contactPrefrence.value == 'email'"
-            pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(gmail)\.com$"
-            [email]="employee.email !== ''"
-            name="email"
-            #email="ngModel"
-            [(ngModel)]="employee.email"
+            [required]="contactPrefrence.value == 'Email'"
             type="text"
             class="form-control"
+            pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+            [(ngModel)]="employee.email"
+            #email="ngModel"
+            name="email"
           />
           <span class="help-block" *ngIf="email.errors?.required">
             Email is required
@@ -51,7 +50,7 @@
           <label for="phoneNumber" class="control-label">Phone Number</label>
           <input
             id="phoneNumber"
-            [required]="contactPrefrence.value == 'phone'"
+            [required]="contactPrefrence.value == 'Phone'"
             name="phoneNumber"
             #phoneNumber="ngModel"
             [(ngModel)]="employee.phoneNumber"
@@ -76,7 +75,7 @@
                 type="radio"
                 required
                 #contactPrefrence="ngModel"
-                value="email"
+                value="Email"
                 name="contactPrefrence"
                 [(ngModel)]="employee.email"
               />
@@ -87,7 +86,7 @@
                 type="radio"
                 required
                 #contactPrefrence="ngModel"
-                value="phone"
+                value="Phone"
                 name="contactPrefrence"
                 [(ngModel)]="employee.phone"
               />
@@ -113,7 +112,7 @@
                 type="radio"
                 required
                 #gender="ngModel"
-                value="male"
+                value="Male"
                 name="gender"
                 [(ngModel)]="employee.gender"
               />
@@ -124,7 +123,7 @@
                 type="radio"
                 required
                 #gender="ngModel"
-                value="female"
+                value="Female"
                 name="gender"
                 [(ngModel)]="employee.gender"
               />
@@ -218,6 +217,7 @@
             type="button"
             (click)="togglePhotoPreview()"
             class="btn btn-primary"
+            *ngIf="employee.photoPath !== '' && employee.photoPath !== null"
           >
             {{ previewPhoto ? "Hide " : "Show " }} Preview
           </button>
@@ -226,9 +226,13 @@
         <div class="form-group">
           <img
             [src]="employee.photoPath"
-            height="200px"
-            width="200px"
-            *ngIf="previewPhoto"
+            height="200"
+            width="200"
+            *ngIf="
+              previewPhoto &&
+              employee.photoPath !== '' &&
+              employee.photoPath !== null
+            "
           />
         </div>
 

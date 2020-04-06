@@ -24,20 +24,20 @@ const appRoutes: Routes = [
   {
     path: "list",
     component: ListEmployeesComponent,
-    resolve: { employeeList: EmployeeListResolverService }
+    resolve: { employeeList: EmployeeListResolverService },
   },
   {
-    path: "create",
+    path: "edit/:id",
     component: CreateEmployeeComponent,
-    canDeactivate: [CreateEmployeeCanDeactivateGuardService]
+    canDeactivate: [CreateEmployeeCanDeactivateGuardService],
   },
   {
     path: "employees/:id",
     component: EmployeeDetailsComponent,
-    canActivate: [EmployeeDetailsGuardService]
+    canActivate: [EmployeeDetailsGuardService],
   },
   { path: "", redirectTo: "/list", pathMatch: "full" },
-  { path: "notfound", component: PageNotFoundComponent }
+  { path: "notfound", component: PageNotFoundComponent },
 ];
 
 @NgModule({
@@ -50,7 +50,7 @@ const appRoutes: Routes = [
     DisplayEmployeeComponent,
     EmployeeDetailsComponent,
     EmployeeFilterPipe,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,14 +58,14 @@ const appRoutes: Routes = [
     FormsModule,
     BsDatepickerModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     EmployeeService,
     CreateEmployeeCanDeactivateGuardService,
     EmployeeListResolverService,
-    EmployeeDetailsGuardService
+    EmployeeDetailsGuardService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

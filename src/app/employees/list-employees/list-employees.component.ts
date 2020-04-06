@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   templateUrl: "./list-employees.component.html",
-  styleUrls: ["./list-employees.component.css"]
+  styleUrls: ["./list-employees.component.css"],
 })
 export class ListEmployeesComponent implements OnInit {
   employees: Employee[];
@@ -21,7 +21,7 @@ export class ListEmployeesComponent implements OnInit {
 
   filterEmployees(searchString: string) {
     return this.employees.filter(
-      employee =>
+      (employee) =>
         employee.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1
     );
   }
@@ -32,6 +32,13 @@ export class ListEmployeesComponent implements OnInit {
       this.searchTerm = this._route.snapshot.queryParamMap.get("searchTerm");
     } else {
       this.filteredEmployees = this.employees;
+    }
+  }
+
+  onDeleteNotification(id: number) {
+    const i = this.filteredEmployees.findIndex((e) => e.id === id);
+    if (i !== -1) {
+      this.filteredEmployees.splice(i, 1);
     }
   }
 
