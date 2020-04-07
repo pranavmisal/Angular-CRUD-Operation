@@ -1,0 +1,67 @@
+{
+  "employees": [
+    {
+      "id": 3,
+      "name": "John",
+      "gender": "Male",
+      "contactPrefrence": "Phone",
+      "phoneNumber": 9865489756,
+      "dateOfBirth": "12/28/1990",
+      "department": "4",
+      "isActive": true,
+      "photoPath": "assets/images/image1.png"
+    },
+    {
+      "id": 4,
+      "name": "David",
+      "gender": "Male",
+      "contactPrefrence": null,
+      "phoneNumber": "9579880141",
+      "email": "",
+      "dateOfBirth": "2020-04-07T05:57:33.000Z",
+      "department": "2",
+      "isActive": true,
+      "photoPath": "assets/images/image2.png",
+      "phone": "Phone"
+    },
+    {
+      "id": 5,
+      "name": "Pranav",
+      "gender": "Male",
+      "contactPrefrence": null,
+      "phoneNumber": "9579880141",
+      "email": "",
+      "dateOfBirth": "2020-04-07T06:20:33.000Z",
+      "department": "3",
+      "isActive": true,
+      "photoPath": "assets/images/image1.png",
+      "phone": "Phone"
+    },
+    {
+      "id": 6,
+      "name": "John Cena",
+      "gender": "Female",
+      "contactPrefrence": null,
+      "phoneNumber": "9579880141",
+      "email": "",
+      "dateOfBirth": "2020-02-02T18:30:00.000Z",
+      "department": "1",
+      "isActive": true,
+      "photoPath": "assets/images/image1.png",
+      "phone": "Phone"
+    },
+    {
+      "id": 7,
+      "name": "Pranav m",
+      "gender": "Male",
+      "contactPrefrence": null,
+      "phoneNumber": "9579880141",
+      "email": "panumisal18@gmail.com",
+      "dateOfBirth": "2020-04-06T07:17:49.000Z",
+      "department": "5",
+      "isActive": true,
+      "photoPath": "assets/images/image2.png",
+      "phone": "Phone"
+    }
+  ]
+}

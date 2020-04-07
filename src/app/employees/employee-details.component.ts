@@ -6,7 +6,7 @@ import { Employee } from "../models/employee.model";
 @Component({
   selector: "app-employee-details",
   templateUrl: "./employee-details.component.html",
-  styleUrls: ["./employee-details.component.css"]
+  styleUrls: ["./employee-details.component.css"],
 })
 export class EmployeeDetailsComponent implements OnInit {
   employee: Employee;
@@ -19,9 +19,12 @@ export class EmployeeDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._route.paramMap.subscribe(params => {
+    this._route.paramMap.subscribe((params) => {
       this._id = +params.get("id");
-      this.employee = this._employeeService.getEmployee(this._id);
+      this._employeeService.getEmployee(this._id).subscribe(
+        (employee) => (this.employee = employee),
+        (err: any) => console.log(err)
+      );
     });
   }
 
@@ -32,7 +35,7 @@ export class EmployeeDetailsComponent implements OnInit {
       this._id = 1;
     }
     this._router.navigate(["/employees", this._id], {
-      queryParamsHandling: "preserve"
+      queryParamsHandling: "preserve",
     });
   }
 }

@@ -1,75 +1,104 @@
 import { Injectable } from "@angular/core";
 import { Employee } from "../models/employee.model";
-import { Observable } from "rxjs";
-import "rxjs/add/observable/of";
-import "rxjs/add/operator/delay";
+import { throwError } from "rxjs";
+import { of } from "rxjs";
+import { delay } from "rxjs/operators";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from "@angular/common/http";
+import { catchError } from "rxjs/operators";
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class EmployeeService {
-  private listEmployees: Employee[] = [
-    {
-      id: 1,
-      name: "Mark",
-      gender: "Male",
-      contactPrefrence: "Email",
-      email: "mark@gmail.com",
-      dateOfBirth: new Date("10/25/1988"),
-      department: "1",
-      isActive: true,
-      photoPath: "assets/images/image1.png",
-    },
-    {
-      id: 2,
-      name: "Mary",
-      gender: "Female",
-      contactPrefrence: "Phone",
-      phoneNumber: 9875489756,
-      dateOfBirth: new Date("10/25/1988"),
-      department: "3",
-      isActive: true,
-      photoPath: "assets/images/image2.png",
-    },
-    {
-      id: 3,
-      name: "John",
-      gender: "Male",
-      contactPrefrence: "Phone",
-      phoneNumber: 9865489756,
-      dateOfBirth: new Date("12/28/1990"),
-      department: "4",
-      isActive: true,
-      photoPath: "assets/images/image1.png",
-    },
-  ];
+  // private listEmployees: Employee[] = [
+  //   {
+  //     id: 1,
+  //     name: "Mark",
+  //     gender: "Male",
+  //     contactPrefrence: "Email",
+  //     email: "mark@pragimtech.com",
+  //     dateOfBirth: new Date("10/25/1988"),
+  //     department: "3",
+  //     isActive: true,
+  //     photoPath: "assets/images/mark.png",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Mary",
+  //     gender: "Female",
+  //     contactPrefrence: "Phone",
+  //     phoneNumber: 2345978640,
+  //     dateOfBirth: new Date("11/20/1979"),
+  //     department: "2",
+  //     isActive: true,
+  //     photoPath: "assets/images/mary.png",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "John",
+  //     gender: "Male",
+  //     contactPrefrence: "Phone",
+  //     phoneNumber: 5432978640,
+  //     dateOfBirth: new Date("3/25/1976"),
+  //     department: "3",
+  //     isActive: false,
+  //     photoPath: "assets/images/john.png",
+  //   },
+  // ];
+
+  baseUrl = "http://localhost:3000/employees";
+
+  constructor(private httpClient: HttpClient) {}
 
   getEmployees(): Observable<Employee[]> {
-    return Observable.of(this.listEmployees).delay(2000);
+    return this.httpClient
+      .get<Employee[]>(this.baseUrl)
+      .pipe(catchError(this.handleError));
   }
 
-  getEmployee(id: number): Employee {
-    return this.listEmployees.find((e) => e.id === id);
+  getEmployee(id: number): Observable<Employee> {
+    return this.httpClient
+      .get<Employee>(`${this.baseUrl}/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
-  save(employee: Employee) {
-    if (employee.id === null) {
-      const maxId = this.listEmployees.reduce(function (e1, e2) {
-        return e1.id > e2.id ? e1 : e2;
-      }).id;
-      employee.id = maxId + 1;
+  addEmployee(employee: Employee): Observable<Employee> {
+    return this.httpClient
+      .post<Employee>(this.baseUrl, employee, {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+        }),
+      })
+      .pipe(catchError(this.handleError));
+  }
 
-      this.listEmployees.push(employee);
+  updateEmployee(employee: Employee): Observable<void> {
+    return this.httpClient
+      .put<void>(`${this.baseUrl}/${employee.id}`, employee, {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+        }),
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteEmployee(id: number): Observable<void> {
+    return this.httpClient
+      .delete<void>(`${this.baseUrl}/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(errorResponse: HttpErrorResponse) {
+    if (errorResponse.error instanceof ErrorEvent) {
+      console.error("Client Side Error :", errorResponse.error.message);
     } else {
-      const foundIndex = this.listEmployees.findIndex(
-        (e) => e.id === employee.id
-      );
-      this.listEmployees[foundIndex] = employee;
+      console.error("Server Side Error :", errorResponse);
     }
-  }
-
-  deleteEmployee(id: number) {
-    const i = this.listEmployees.findIndex((e) => e.id === id);
-    if (i !== -1) {
-      this.listEmployees.splice(i, 1);
-    }
+    return throwError(
+      "There is a problem with the service. We are notified & working on it. Please try again later."
+    );
   }
 }

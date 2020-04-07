@@ -5,6 +5,7 @@ import { Employee } from "../models/employee.model";
 import { BsDatepickerConfig } from "ngx-bootstrap/datepicker";
 import { EmployeeService } from "./employee.service";
 import { Router, ActivatedRoute } from "@angular/router";
+import { Identifiers } from "@angular/compiler";
 
 @Component({
   selector: "app-create-employee",
@@ -68,14 +69,32 @@ export class CreateEmployeeComponent implements OnInit {
       this.createEmployeeForm.reset();
     } else {
       this.panelTitle = "Edit Employee";
-      this.employee = Object.assign({}, this._employeeService.getEmployee(id));
+      this._employeeService.getEmployee(id).subscribe(
+        (employee) => (this.employee = employee),
+        (err: any) => console.log(err)
+      );
     }
   }
 
-  saveEmployee(empForm: NgForm): void {
-    const newEmployee = Object.assign({}, this.employee);
-    this._employeeService.save(newEmployee);
-    this.createEmployeeForm.reset();
-    this._router.navigate(["list"]);
+  // saveEmployee(empForm: NgForm): void {
+  saveEmployee(): void {
+    if (this.employee.id == null) {
+      this._employeeService.addEmployee(this.employee).subscribe(
+        (data: Employee) => {
+          console.log(data);
+          this.createEmployeeForm.reset();
+          this._router.navigate(["list"]);
+        },
+        (error: any) => console.log(error)
+      );
+    } else {
+      this._employeeService.updateEmployee(this.employee).subscribe(
+        () => {
+          this.createEmployeeForm.reset();
+          this._router.navigate(["list"]);
+        },
+        (error: any) => console.log(error)
+      );
+    }
   }
 }

@@ -2,7 +2,7 @@
   [title]="employee.name"
   [isHidden]="true"
   [hasJustViewed]="selectedEmployeeId === employee.id"
-  [isHidden]="true"
+  [isHidden]=""
 >
   <div class="col-xs-10 myPanelBody">
     <div class="row vertical-align">
@@ -53,7 +53,7 @@
           <div class="col-6" [ngSwitch]="employee.department">
             :
             <span *ngSwitchCase="1">Help Desk</span>
-            <span *ngSwitchcase="2">HR</span>
+            <span *ngSwitchCase="2">HR</span>
             <span *ngSwitchCase="3">IT</span>
             <span *ngSwitchCase="4">Payroll</span>
             <span *ngSwitchCase="5">Admin</span>
